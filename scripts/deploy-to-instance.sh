@@ -11,3 +11,6 @@ chmod 700 ~/.ssh
 # the IP changes
 rsync -av -e "ssh -o StrictHostKeyChecking=no" ./* ec2-user@$BALLOON_INSTANCE_IP_1:/var/acebook/
 ssh -o StrictHostKeyChecking=no ec2-user@$BALLOON_INSTANCE_IP_1 "sudo systemctl restart acebook"
+
+rsync -av -e "ssh -o StrictHostKeyChecking=no" ./* ec2-user@$BALLOON_INSTANCE_IP_2:/var/acebook/
+ssh -o StrictHostKeyChecking=no ec2-user@$BALLOON_INSTANCE_IP_2 "sudo systemctl restart acebook"

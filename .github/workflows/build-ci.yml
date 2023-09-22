@@ -45,6 +45,7 @@ jobs:
     env:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       BALLOON_INSTANCE_IP_1: ${{ vars.BALLOON_INSTANCE_IP_1 }}
+      BALLOON_INSTANCE_IP_2: ${{ vars.BALLOON_INSTANCE_IP_2 }}
 
     steps:
       - name: Check out the code
