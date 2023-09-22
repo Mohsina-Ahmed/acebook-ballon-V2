@@ -31,3 +31,27 @@ jobs:
         with:
           config-file: cypress.config.js
           start: npm run start:ci
+
+  deploy:
+    # If we're running on the main branch (not a PR)
+    if: github.ref == 'refs/heads/main'
+    # And no other deploy jobs are running
+    needs: build
+
+    concurrency: production
+
+    runs-on: ubuntu-latest
+
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      BALLOON_INSTANCE_IP_1: ${{ vars.BALLOON_INSTANCE_IP_1 }}
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Call a Bash Script to transfer files to servers  # Execute a Bash script.
+        run: |
+          chmod +x scripts/deploy-to-instance.sh  
+          ./scripts/deploy-to-instance.sh 
+
