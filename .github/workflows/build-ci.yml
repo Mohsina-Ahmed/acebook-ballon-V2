@@ -44,12 +44,19 @@ jobs:
 
     env:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       BALLOON_INSTANCE_IP_1: ${{ vars.BALLOON_INSTANCE_IP_1 }}
       BALLOON_INSTANCE_IP_2: ${{ vars.BALLOON_INSTANCE_IP_2 }}
 
     steps:
       - name: Check out the code
         uses: actions/checkout@v3
+
+      - name: Call a Bash Script to build AMI  # Execute a Bash script.
+        run: |
+          chmod +x scripts/build-ami.sh  
+          ./scripts/build-ami.sh 
 
       - name: Call a Bash Script to transfer files to servers  # Execute a Bash script.
         run: |
