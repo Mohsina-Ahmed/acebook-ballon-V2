@@ -66,8 +66,9 @@ aws ec2 create-image \
     --no-reboot
 
 # Cleanup
-echo " -> terminating instance"
-aws ec2 terminate-instances --instance-ids $INSTANCE_ID > /dev/null
-rm -f keypair keypair.pub build_instance_id
+# echo " -> terminating instance"
+# aws ec2 terminate-instances --instance-ids $INSTANCE_ID > /dev/null
+# rm -f keypair keypair.pub build_instance_id
 
 echo "-> done"
+echo "$INSTANCE_ID"
